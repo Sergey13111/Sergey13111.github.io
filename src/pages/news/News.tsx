@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { Loader } from '../../components/Loader';
 
 const News: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -42,7 +43,7 @@ const News: React.FC = () => {
 	};
 
 	if (isLoading) {
-		return <Container>{/* <Loader /> */}</Container>;
+		return <Loader />;
 	}
 
 	return (

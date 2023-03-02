@@ -9,10 +9,9 @@ import { authLogin, selectIsAuth } from '../../app/store/AuthSlice';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-
-
 const AuthForm: React.FC = () => {
 	const isAuth = useAppSelector(selectIsAuth);
+	const { user } = useAppSelector((state) => state.auth);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
@@ -37,23 +36,26 @@ const AuthForm: React.FC = () => {
 
 	useEffect(() => {
 		if (isAuth) {
-			return navigate('/', { replace: true });
+			return navigate('/profile', { replace: true });
 		}
 	}, [isAuth, navigate]);
 
-	const handleAuth = (values: IUser) => {
+	console.log(user);
+
+	const handleLogin = (values: IUser) => {
 		console.log(values);
 
 		const data = dispatch(authLogin(values));
 		console.log(data);
+		console.log('isAuth', isAuth);
+		console.log('user', user);
 
-		// if (!data.payload) {
+		// if (!user) {
 		// 	return alert('The username or password entered is incorrect!');
 		// } else {
-		// 	// window.localStorage.setItem('token', data.payload.token);
+		// 	// window.localStorage.setItem('user', data.payload);
+		// 	window.localStorage.setItem('user', JSON.stringify(data.payload));
 		// }
-
-		console.log('isAuth', isAuth);
 	};
 
 	return (
@@ -61,7 +63,7 @@ const AuthForm: React.FC = () => {
 			<Container maxWidth='xs'>
 				{/* <Typography variant='h1'>Authorization</Typography> */}
 
-				<form onSubmit={handleSubmit(handleAuth)}>
+				<form onSubmit={handleSubmit(handleLogin)}>
 					<Box p={3}>
 						<Box my={2}>
 							<Controller
@@ -101,8 +103,6 @@ const AuthForm: React.FC = () => {
 					</Box>
 				</form>
 			</Container>
-
-		
 		</>
 	);
 };

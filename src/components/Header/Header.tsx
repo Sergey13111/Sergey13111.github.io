@@ -33,44 +33,52 @@ const Header = () => {
 	console.log(isAuth);
 
 	const peach = amber['100'];
-
 	const drawerWidth = 240;
-	const navItems = [
-		<NavLink
-			to='/'
-			className={styles.NavLink}>
-			Home
-		</NavLink>,
-		<NavLink
-			to='news'
-			className={styles.NavLink}>
-			News
-		</NavLink>,
-		<NavLink
-			to='authorization'
-			className={styles.NavLink}>
-			Authorization
-		</NavLink>,
-		<NavLink
-			to='profile'
-			className={styles.NavLink}>
-			Profile
-		</NavLink>,
 
-		// <NavLink to='/' className={styles.NavLink}>Home</NavLink>,
-		// <NavLink to='news' className={styles.NavLink}>News</NavLink>,
-		// <NavLink to='auth/registration' className={styles.NavLink}>SignUp</NavLink>,
-		// <NavLink to='auth/login' className={styles.NavLink}>Login</NavLink>,
-	];
+	const navItems = isAuth
+		? [
+				<NavLink
+					to='/'
+					className={styles.NavLink}>
+					Home
+				</NavLink>,
+				<NavLink
+					to='news'
+					className={styles.NavLink}>
+					News
+				</NavLink>,
+				<NavLink
+					to='profile'
+					className={styles.NavLink}>
+					Profile
+				</NavLink>,
+		  ]
+		: [
+				<NavLink
+					to='/'
+					className={styles.NavLink}>
+					Home
+				</NavLink>,
+				<NavLink
+					to='news'
+					className={styles.NavLink}>
+					News
+				</NavLink>,
+				<NavLink
+					to='authorization'
+					className={styles.NavLink}>
+					Authorization
+				</NavLink>,
+		  ];
 
 	const handleLogout = () => {
 		if (window.confirm('Do you really want to leave?')) {
 			dispatch(logout());
+			localStorage.removeItem('user');
 		}
-		// localStorage.removeItem('user');
+
 		navigate('/');
 	};
-
 
 	const [mobileOpen, setMobileOpen] = useState(false);
 
