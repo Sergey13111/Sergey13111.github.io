@@ -1,0 +1,9 @@
+{
+	"menu": {
+		"home": "Home",
+		"news": "News",
+		"profile": "Profile",
+		"authorization": "authorization",
+		"logout": "Logout"
+	}
+}

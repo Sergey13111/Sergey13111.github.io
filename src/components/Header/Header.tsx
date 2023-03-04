@@ -22,14 +22,31 @@ import { amber } from '@mui/material/colors';
 import styles from './Header.module.css';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { logout, selectIsAuth } from '../../app/store/AuthSlice';
+import { useTranslation } from 'react-i18next';
+import ChangeLngsButton from '../ChangeLngsButton/ChangeLngsButton';
 
 // import {  logout } from '../../store/authSlice';
 // import styles from './Header.module.css';
 
+// interface Ilanguage {
+// 	nativeName: string;
+// }
+
+// interface ILngs {
+// 	en: Ilanguage;
+// 	ua: Ilanguage;
+// }
+
+// const lngs: ILngs = {
+// 	en: { nativeName: 'English' },
+// 	ua: { nativeName: 'Ukraine' },
+// };
 const Header = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const isAuth = useAppSelector(selectIsAuth);
+
+	const { t } = useTranslation();
 	console.log(isAuth);
 
 	const peach = amber['100'];
@@ -40,17 +57,17 @@ const Header = () => {
 				<NavLink
 					to='/'
 					className={styles.NavLink}>
-					Home
+					{t('menu.home')}
 				</NavLink>,
 				<NavLink
 					to='news'
 					className={styles.NavLink}>
-					News
+					{t('menu.news')}
 				</NavLink>,
 				<NavLink
 					to='profile'
 					className={styles.NavLink}>
-					Profile
+					{t('menu.profile')}
 				</NavLink>,
 		  ]
 		: [
@@ -62,12 +79,12 @@ const Header = () => {
 				<NavLink
 					to='news'
 					className={styles.NavLink}>
-					News
+					{t('menu.news')}
 				</NavLink>,
 				<NavLink
 					to='authorization'
 					className={styles.NavLink}>
-					Authorization
+					{t('menu.authorization')}
 				</NavLink>,
 		  ];
 
@@ -154,9 +171,10 @@ const Header = () => {
 							<Button
 								onClick={handleLogout}
 								sx={{ color: '#fff' }}>
-								Logout
+								{t('menu.logout')}
 							</Button>
 						)}
+						<ChangeLngsButton />
 					</Box>
 				</Toolbar>
 			</AppBar>
