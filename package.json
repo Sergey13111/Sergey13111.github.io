@@ -2,7 +2,7 @@
 	"name": "news_portal",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://sergey13111.github.io/news_portal/",
+	"homepage": "https://sergey13111.github.io/",
 	"dependencies": {
 		"@emotion/react": "^11.10.6",
 		"@emotion/styled": "^11.10.6",
