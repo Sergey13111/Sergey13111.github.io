@@ -14,15 +14,10 @@ const authSlice = createSlice({
 	reducers: {
 		authLogin: (state, action: PayloadAction<IUser>) => {
 			const isAuth = JSON.stringify(existingUser) === JSON.stringify(action.payload);
-			if (!isAuth) {
-				return alert('The username or password entered is incorrect!');
-			} else {
-				isAuth && (state.user = action.payload);
-				window.localStorage.setItem('user', JSON.stringify(action.payload));
-			}
+			isAuth && (state.user = action.payload);
+			window.localStorage.setItem('user', JSON.stringify(action.payload));
 		},
-		authMe: (state) => {
-		},
+		authMe: (state) => {},
 		logout: (state) => {
 			state.user = null;
 		},

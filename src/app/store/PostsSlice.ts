@@ -20,7 +20,7 @@ export const deletePost = createAsyncThunk('posts/deletePost', async (id: number
 	try {
 		const data: IPost[] = await axios.delete(`/posts/${id}`);
 		dispatch(removePost(id));
-		return data;
+		console.log(data);
 	} catch (error: any) {
 		return alert(error.message);
 	}

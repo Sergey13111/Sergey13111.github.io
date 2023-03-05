@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import { useTranslation } from 'react-i18next';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import {
 	AppBar,
@@ -21,7 +19,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { amber } from '@mui/material/colors';
 import styles from './Header.module.css';
 import { logout, selectIsAuth } from '../../app/store/AuthSlice';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { ChangeLngsButton } from '../ChangeLngsButton';
+import { useTranslation } from 'react-i18next';
+import '../../i18n';
 
 const Header: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -55,7 +56,7 @@ const Header: React.FC = () => {
 				<NavLink
 					to='/'
 					className={styles.NavLink}>
-					Home
+					{t('menu.home')}
 				</NavLink>,
 				<NavLink
 					to='news'

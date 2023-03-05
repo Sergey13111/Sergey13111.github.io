@@ -9,9 +9,9 @@ const App: React.FC = () => {
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
+		dispatch(authMe());
 		const userData = JSON.parse(localStorage.getItem('user')!);
 		dispatch(authLogin(userData));
-		dispatch(authMe());
 	}, [dispatch]);
 
 	return (

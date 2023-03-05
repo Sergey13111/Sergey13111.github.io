@@ -2,7 +2,7 @@ import { AppBar, Box, Typography } from '@mui/material';
 import CopyrightIcon from '@mui/icons-material/Copyright';
 import { amber } from '@mui/material/colors';
 
-const Footer = () => {
+const Footer: React.FC = () => {
 	const peach = amber['100'];
 	return (
 		<>

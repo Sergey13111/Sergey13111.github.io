@@ -40,7 +40,7 @@ const News: React.FC = () => {
 					size='small'
 					color='primary'
 					fullWidth={false}
-					sx={{ mb: 2, mt: 3, fontSize: 18, color: '#5d4037' }}
+					sx={{ mb: 5, mt: 3, fontSize: 18, color: '#5d4037' }}
 					onClick={handleShowMore}>
 					Show more...
 				</Button>

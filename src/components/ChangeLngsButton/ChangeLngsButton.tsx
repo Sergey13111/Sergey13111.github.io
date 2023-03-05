@@ -8,7 +8,7 @@ import MenuList from '@mui/material/MenuList';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const ChangeLngsButton = () => {
+const ChangeLngsButton: React.FC = () => {
 	const options = useMemo(() => ['en', 'uk'], []);
 	const [open, setOpen] = useState(false);
 	const anchorRef = useRef<HTMLDivElement>(null);

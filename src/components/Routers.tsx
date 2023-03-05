@@ -6,7 +6,7 @@ import { NotFound } from '../pages/notFound';
 import { Authorization } from '../pages/authorization';
 import { Profile } from '../pages/profile';
 
-const Routers = () => {
+const Routers: React.FC = () => {
 	return (
 		<Routes>
 			<Route

@@ -7,6 +7,7 @@ import { IUser } from '../../models/IUser';
 import { authLogin, selectIsAuth } from '../../app/store/AuthSlice';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { existingUser } from '../../fakeBD';
 
 const AuthForm: React.FC = () => {
 	const isAuth = useAppSelector(selectIsAuth);
@@ -39,7 +40,12 @@ const AuthForm: React.FC = () => {
 	}, [isAuth, navigate]);
 
 	const handleLogin = (values: IUser) => {
-		dispatch(authLogin(values));
+		const isUser = JSON.stringify(existingUser) === JSON.stringify(values);
+		if (!isUser) {
+			return alert('The username or password entered is incorrect!');
+		} else {
+			dispatch(authLogin(values));
+		}
 	};
 
 	return (
