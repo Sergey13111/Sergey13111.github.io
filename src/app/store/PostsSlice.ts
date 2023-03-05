@@ -3,22 +3,16 @@ import axios from '../../helpers/axios';
 import { IPost } from '../../models/IPost';
 import { PostsSliceState } from '../../models/PostsSliceState';
 
-// export interface PostsSliceState {
-// 	posts: IPost[] | [];
-// 	status: 'loading' | 'loaded' | 'error';
-// }
-
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (page: number, thunkAPI) => {
 	const params = {
 		_page: page,
-		_limit: 8,
+		_limit: 9,
 	};
 	try {
 		const data: IPost[] = await axios.get('/posts', { params });
-		console.log(data);
 		return data;
 	} catch (error: any) {
-		return console.log(error.message);
+		return alert(error.message);
 	}
 });
 
@@ -26,10 +20,9 @@ export const deletePost = createAsyncThunk('posts/deletePost', async (id: number
 	try {
 		const data: IPost[] = await axios.delete(`/posts/${id}`);
 		dispatch(removePost(id));
-		console.log(data);
-		// return data;
+		return data;
 	} catch (error: any) {
-		return console.log(error.message);
+		return alert(error.message);
 	}
 });
 
@@ -51,7 +44,6 @@ const postsSlice = createSlice({
 	},
 	extraReducers: (builder) => {
 		builder.addCase(fetchPosts.pending, (state) => {
-			// state.posts = [];
 			state.status = 'loading';
 		});
 		builder.addCase(fetchPosts.fulfilled, (state, action) => {

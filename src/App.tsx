@@ -10,7 +10,6 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		const userData = JSON.parse(localStorage.getItem('user')!);
-		console.log(userData);
 		dispatch(authLogin(userData));
 		dispatch(authMe());
 	}, [dispatch]);

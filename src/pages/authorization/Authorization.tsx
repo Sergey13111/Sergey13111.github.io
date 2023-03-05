@@ -4,8 +4,12 @@ import { AuthForm } from '../../components/AuthForm';
 const Authorization: React.FC = () => {
 	return (
 		<>
-			<Container>
-				<Typography variant='h1'>Authorization</Typography>
+			<Container sx={{ my: 20, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+				<Typography
+					variant='h3'
+					sx={{ mb: 2, color: '#5d4037' }}>
+					Authorization
+				</Typography>
 				<Box>
 					<AuthForm />
 				</Box>

@@ -9,19 +9,11 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const ChangeLngsButton = () => {
-	const options = useMemo(() => ['en', 'ua'], []);
+	const options = useMemo(() => ['en', 'uk'], []);
 	const [open, setOpen] = useState(false);
 	const anchorRef = useRef<HTMLDivElement>(null);
 	const [selectedIndex, setSelectedIndex] = useState(0);
-
 	const { i18n } = useTranslation();
-	// const changleLanguage = (lang: string) => () => {
-	// 	i18n.changeLanguage(lang);
-	// };
-
-	// const handleClick = () => {
-	// 	console.info(`You clicked ${options[selectedIndex]}`);
-	// };
 
 	useEffect(() => {
 		const setLanguage = () => {
@@ -61,6 +53,7 @@ const ChangeLngsButton = () => {
 				ref={anchorRef}
 				aria-label='split button'>
 				<Button
+					color='inherit'
 					size='small'
 					aria-controls={open ? 'split-button-menu' : undefined}
 					aria-expanded={open ? 'true' : undefined}

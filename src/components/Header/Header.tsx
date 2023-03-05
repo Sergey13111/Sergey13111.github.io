@@ -1,6 +1,6 @@
-// import { useEffect, useRef } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { useTranslation } from 'react-i18next';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import {
 	AppBar,
@@ -20,34 +20,15 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { amber } from '@mui/material/colors';
 import styles from './Header.module.css';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { logout, selectIsAuth } from '../../app/store/AuthSlice';
-import { useTranslation } from 'react-i18next';
-import ChangeLngsButton from '../ChangeLngsButton/ChangeLngsButton';
+import { ChangeLngsButton } from '../ChangeLngsButton';
 
-// import {  logout } from '../../store/authSlice';
-// import styles from './Header.module.css';
-
-// interface Ilanguage {
-// 	nativeName: string;
-// }
-
-// interface ILngs {
-// 	en: Ilanguage;
-// 	ua: Ilanguage;
-// }
-
-// const lngs: ILngs = {
-// 	en: { nativeName: 'English' },
-// 	ua: { nativeName: 'Ukraine' },
-// };
-const Header = () => {
+const Header: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 	const isAuth = useAppSelector(selectIsAuth);
 
 	const { t } = useTranslation();
-	console.log(isAuth);
 
 	const peach = amber['100'];
 	const drawerWidth = 240;
@@ -128,6 +109,13 @@ const Header = () => {
 						</ListItemButton>
 					</ListItem>
 				))}
+				{isAuth && (
+					<Button
+						onClick={handleLogout}
+						sx={{ color: '#5d4037' }}>
+						{t('menu.logout')}
+					</Button>
+				)}
 			</List>
 		</Box>
 	);
@@ -135,9 +123,7 @@ const Header = () => {
 	return (
 		<Box sx={{ display: 'flex' }}>
 			<CssBaseline />
-			<AppBar
-				// component='nav'
-				sx={{ background: peach }}>
+			<AppBar sx={{ background: peach }}>
 				<Toolbar
 					sx={{
 						justifyContent: 'space-between',
@@ -158,11 +144,11 @@ const Header = () => {
 							variant='h6'
 							component='div'
 							sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-							NewsPortal!!
+							NewsPortal
 						</Typography>
 					</Link>
 
-					<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+					<Box sx={{ display: { xs: 'none', sm: 'flex' } }}>
 						{navItems.map((item, index) => (
 							<Button key={index}>{item}</Button>
 						))}
@@ -170,10 +156,15 @@ const Header = () => {
 						{isAuth && (
 							<Button
 								onClick={handleLogout}
-								sx={{ color: '#fff' }}>
+								sx={{ color: '#5d4037' }}>
 								{t('menu.logout')}
 							</Button>
 						)}
+						<Box sx={{ ml: 2 }}>
+							<ChangeLngsButton />
+						</Box>
+					</Box>
+					<Box sx={{ display: { xs: 'block', sm: 'none' } }}>
 						<ChangeLngsButton />
 					</Box>
 				</Toolbar>
@@ -196,4 +187,5 @@ const Header = () => {
 		</Box>
 	);
 };
+
 export default Header;

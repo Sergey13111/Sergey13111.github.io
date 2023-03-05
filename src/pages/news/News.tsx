@@ -1,25 +1,13 @@
 import { useEffect, useState } from 'react';
-// import { Loader } from '../../components/Loader';
-
-import { fetchPosts, deletePost, resetPosts } from '../../app/store/PostsSlice';
-// import styles from './Posts.module.css';
-import {
-	Button,
-	CardActionArea,
-	CardActions,
-	CardContent,
-	Card,
-	Typography,
-	Container,
-	Grid,
-} from '@mui/material';
-
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { fetchPosts, resetPosts } from '../../app/store/PostsSlice';
+import { Button, Typography, Container } from '@mui/material';
 import { Loader } from '../../components/Loader';
+import { CartPost } from '../../components/CartPost';
 
 const News: React.FC = () => {
 	const dispatch = useAppDispatch();
-	const { posts, status } = useAppSelector((state) => state.posts);
+	const { status } = useAppSelector((state) => state.posts);
 	const [page, setPage] = useState(1);
 	const isLoading = status === 'loading';
 
@@ -31,15 +19,8 @@ const News: React.FC = () => {
 		dispatch(fetchPosts(page));
 	}, [dispatch, page]);
 
-	console.log(posts);
-
 	const handleShowMore = () => {
 		setPage((page) => (page += 1));
-	};
-
-	const handleDelete = (id: number) => () => {
-		dispatch(deletePost(id));
-		console.log(id);
 	};
 
 	if (isLoading) {
@@ -48,57 +29,24 @@ const News: React.FC = () => {
 
 	return (
 		<>
-			<Container sx={{ mt: 10 }}>
-				<Typography variant='h1'>News</Typography>;
-				<Grid
-					container
-					spacing={{ xs: 2, md: 3 }}
-					columns={{ xs: 4, sm: 8, md: 12 }}>
-					{posts &&
-						posts.map(({ id, title, body }) => (
-							<Grid
-								item
-								xs={2}
-								sm={4}
-								md={4}
-								key={id}>
-								<Card sx={{ maxWidth: 345 }}>
-									<CardActions>
-										<Button
-											size='small'
-											color='primary'
-											onClick={handleDelete(id)}>
-											Dellete
-										</Button>
-									</CardActions>
-
-									<CardActionArea>
-										<CardContent>
-											<Typography
-												gutterBottom
-												variant='h5'
-												component='div'>
-												{title}
-											</Typography>
-											<Typography
-												variant='body2'
-												color='text.secondary'>
-												{body}
-											</Typography>
-										</CardContent>
-									</CardActionArea>
-								</Card>
-							</Grid>
-						))}
-				</Grid>
+			<Container sx={{ my: 12, textAlign: 'center' }}>
+				<Typography
+					sx={{ mb: 2, color: '#5d4037' }}
+					variant='h3'>
+					News
+				</Typography>
+				<CartPost />
 				<Button
 					size='small'
 					color='primary'
+					fullWidth={false}
+					sx={{ mb: 2, mt: 3, fontSize: 18, color: '#5d4037' }}
 					onClick={handleShowMore}>
-					Show more
+					Show more...
 				</Button>
 			</Container>
 		</>
 	);
 };
+
 export default News;

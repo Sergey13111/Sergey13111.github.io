@@ -1,6 +1,5 @@
 import { TextField, Container, Button, Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -11,7 +10,6 @@ import { useEffect } from 'react';
 
 const AuthForm: React.FC = () => {
 	const isAuth = useAppSelector(selectIsAuth);
-	const { user } = useAppSelector((state) => state.auth);
 	const navigate = useNavigate();
 	const dispatch = useAppDispatch();
 
@@ -40,31 +38,17 @@ const AuthForm: React.FC = () => {
 		}
 	}, [isAuth, navigate]);
 
-	console.log(user);
-
 	const handleLogin = (values: IUser) => {
-		console.log(values);
-
-		const data = dispatch(authLogin(values));
-		console.log(data);
-		console.log('isAuth', isAuth);
-		console.log('user', user);
-
-		// if (!user) {
-		// 	return alert('The username or password entered is incorrect!');
-		// } else {
-		// 	// window.localStorage.setItem('user', data.payload);
-		// 	window.localStorage.setItem('user', JSON.stringify(data.payload));
-		// }
+		dispatch(authLogin(values));
 	};
 
 	return (
 		<>
 			<Container maxWidth='xs'>
-				{/* <Typography variant='h1'>Authorization</Typography> */}
-
 				<form onSubmit={handleSubmit(handleLogin)}>
-					<Box p={3}>
+					<Box
+						p={3}
+						sx={{ textAlign: 'center' }}>
 						<Box my={2}>
 							<Controller
 								name='username'
@@ -96,7 +80,9 @@ const AuthForm: React.FC = () => {
 						</Box>
 
 						<Button
+							sx={{ mt: 2 }}
 							variant='contained'
+							color='inherit'
 							type='submit'>
 							log In
 						</Button>
