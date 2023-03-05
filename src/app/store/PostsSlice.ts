@@ -18,9 +18,8 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (page: numb
 
 export const deletePost = createAsyncThunk('posts/deletePost', async (id: number, { dispatch }) => {
 	try {
-		const data: IPost[] = await axios.delete(`/posts/${id}`);
+		await axios.delete(`/posts/${id}`);
 		dispatch(removePost(id));
-		console.log(data);
 	} catch (error: any) {
 		return alert(error.message);
 	}
